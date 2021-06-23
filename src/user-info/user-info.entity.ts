@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Industries } from "./industires/industries.entity";
+import { Specialities } from "./specialities/specialities.entity";
 
 @Entity()
 export class UserInfo{
@@ -17,9 +19,9 @@ export class UserInfo{
     @Column()
     phoneNumber:string;
 
-    @Column()
-    specialities: string;
+    @OneToMany(_type => Specialities, specialities => specialities.userInfo, { eager: true })
+    specialities: Specialities[];
 
-    @Column()
-    industries: string;
+    @OneToMany(_type => Industries, industries => industries.userInfo, { eager: true })
+    industries: Industries[];
 }
