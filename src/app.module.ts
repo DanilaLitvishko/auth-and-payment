@@ -6,6 +6,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { async } from 'rxjs';
 import { configValidationSchema } from './config.schema';
 import { UserInfoModule } from './user-info/user-info.module';
+import { Industries } from './user-info/industires/industries.entity';
+import { Specialities } from './user-info/specialities/specialities.entity';
+import { UserInfo } from './user-info/user-info.entity';
 
 @Module({
   imports: [

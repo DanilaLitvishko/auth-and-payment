@@ -8,6 +8,5 @@ export class PaymentController {
     @Post()
     payment(@Body('paymentCredentials') paymentCredentials:PaymentCredentials){
         const stripe = new Stripe('', {apiVersion: '2020-08-27'})
-        
     }
 }

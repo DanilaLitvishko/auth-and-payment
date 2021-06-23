@@ -10,8 +10,8 @@ export class UserInfoController {
     constructor(private userInfoService: UserInfoService){}
 
     @Post()
-    addUserInfo(@Body() userCredentialsDto: UserCredentialsDto):Promise<UserInfo>{
-        return this.userInfoService.addUserInfo(userCredentialsDto)
+    addUserInfo(@Body() userCredentialsDto: UserCredentialsDto, @GetUser() user:User):Promise<UserInfo>{
+        return this.userInfoService.addUserInfo(userCredentialsDto, user);
     }
 
     @Get()
