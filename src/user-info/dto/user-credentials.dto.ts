@@ -14,7 +14,9 @@ export class UserCredentialsDto{
     @IsPhoneNumber()
     phoneNumber:string;
 
-    specialities: any;
+    @IsString()
+    specialities: string;
 
-    industries: any;
+    @IsString()
+    industries: string;
 }

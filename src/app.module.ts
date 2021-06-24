@@ -16,6 +16,7 @@ import { UserInfo } from './user-info/user-info.entity';
       envFilePath:[`.env.stage.${process.env.STAGE}`],
       validationSchema: configValidationSchema
     }),
+    UserInfoModule,
     TypeOrmModule.forRootAsync({
       imports:[ConfigModule],
       inject: [ConfigService],
@@ -31,7 +32,6 @@ import { UserInfo } from './user-info/user-info.entity';
       })
     }),
     AuthModule,
-    UserInfoModule
   ],
 })
 export class AppModule {}

@@ -12,7 +12,7 @@ import { UsersRepository } from "./users.repository";
 export class JwtStrategy extends PassportStrategy(Strategy){
     constructor(
         @InjectRepository(UsersRepository)
-        private userRepository: UsersRepository,
+        private usersRepository: UsersRepository,
         private configService:ConfigService
     ){
         super({
@@ -23,7 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy){
 
     async validate(payload: JwtPayload): Promise<User>{
         const { username } = payload;
-        const user:User = await this.userRepository.findOne({username});
+        const user:User = await this.usersRepository.findOne({username});
 
         if(!user){
             throw new UnauthorizedException();

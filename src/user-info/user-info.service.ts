@@ -20,9 +20,10 @@ export class UserInfoService {
             name,
             companyName,
             phoneNumber,
+            user_id: user.id,
         })
 
-        this.userInfoRepository.save(userInfo);
+        await this.userInfoRepository.save(userInfo);
 
         const specialitiesNote = this.specialitiesRepository.create({
             name: specialities,
@@ -34,13 +35,13 @@ export class UserInfoService {
             userInfo
         })
 
-        this.specialitiesRepository.save(specialitiesNote)
-        this.industriesRepository.save(industriesNote)
+        await this.specialitiesRepository.save(specialitiesNote)
+        await this.industriesRepository.save(industriesNote)
 
         userInfo.industries = await this.industriesRepository.find({where:{userInfo}});
         userInfo.specialities = await this.specialitiesRepository.find({where:{userInfo}});
 
-        return this.userInfoRepository.save(userInfo);
+        return userInfo;
     }
 
     getUserInfo(id: string):Promise<UserInfo>{
