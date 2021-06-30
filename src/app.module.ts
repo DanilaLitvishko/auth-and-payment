@@ -3,12 +3,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/modules/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { async } from 'rxjs';
 import { configValidationSchema } from './config.schema';
 import { UserInfoModule } from './user-info/modules/user-info.module';
-import { Industries } from './user-info/repositories/industires/industries.entity';
-import { Specialities } from './user-info/repositories/specialities/specialities.entity';
-import { UserInfo } from './user-info/repositories/user-info/user-info.entity';
+import { ConfirmRegistrationModule } from './confirm-registration/modules/confirm-registration.module';
 
 @Module({
   imports: [
@@ -32,6 +29,7 @@ import { UserInfo } from './user-info/repositories/user-info/user-info.entity';
       })
     }),
     AuthModule,
+    ConfirmRegistrationModule,
   ],
 })
 export class AppModule {}

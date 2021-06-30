@@ -10,4 +10,10 @@ export class User{
 
     @Column()
     password:string;
+
+    @Column({ unique:true })
+    confirmationCode: string;
+
+    @Column()
+    isConfirm: boolean;
 }
