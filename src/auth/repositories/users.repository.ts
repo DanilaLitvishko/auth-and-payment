@@ -39,7 +39,7 @@ export class UsersRepository extends Repository<User>{
             `<h1>Email Confirmation</h1>
             <h2>Hello ${username}</h2>
             <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
-            <a href=http://localhost:3001/confirm-registration/${confirmationCode}> Click here</a>
+            <a href=http://localhost:3000/activateEmail/${confirmationCode}> Click here</a>
             </div>`,
         })
         const salt = await bcrypt.genSalt();
