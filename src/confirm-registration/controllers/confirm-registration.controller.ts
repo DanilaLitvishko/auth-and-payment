@@ -11,4 +11,9 @@ export class ConfirmRegistrationController {
     confirmRegistration(@Param('confirmationCode') confirmationCode:string):Promise<User>{
         return this.confirmRegistrationService.confirmRegistration(confirmationCode);
     }
+
+    @Get('/resend-email/:email')
+    resendEmail(@Param('email') email:string):any{
+        return this.confirmRegistrationService.resendEmail(email);
+    }
 }
