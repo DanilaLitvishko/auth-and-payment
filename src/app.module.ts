@@ -6,6 +6,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { configValidationSchema } from './config.schema';
 import { UserInfoModule } from './user-info/modules/user-info.module';
 import { ConfirmRegistrationModule } from './confirm-registration/modules/confirm-registration.module';
+import { SpecialitiesModule } from './specialities/module/specialities.module';
+import { IndustriesModule } from './industries/module/industries.module';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { ConfirmRegistrationModule } from './confirm-registration/modules/confir
     }),
     AuthModule,
     ConfirmRegistrationModule,
+    SpecialitiesModule,
+    IndustriesModule
   ],
 })
 export class AppModule {}
