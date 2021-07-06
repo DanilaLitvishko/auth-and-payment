@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/dto/get-user.decorators';
 import { User } from 'src/auth/repositories/user.entity';
 import { UserCredentialsDto } from '../dto/user-credentials.dto';
-import { UserInfo } from '../repositories/user-info/user-info.entity';
+import { UserInfo } from '../repositories/user-info.entity';
 import { UserInfoService } from '../services/user-info.service';
 
 @Controller('user-info')

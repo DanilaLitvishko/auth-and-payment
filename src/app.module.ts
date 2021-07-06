@@ -1,11 +1,13 @@
  
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from './auth/modules/auth.module';
+import { AuthModule } from './auth/module/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { configValidationSchema } from './config.schema';
 import { UserInfoModule } from './user-info/modules/user-info.module';
 import { ConfirmRegistrationModule } from './confirm-registration/modules/confirm-registration.module';
+import { IndustriesModule } from './industries/module/industries.module';
+import { SpecialitiesModule } from './specialities/module/specialities.module';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { ConfirmRegistrationModule } from './confirm-registration/modules/confir
     }),
     AuthModule,
     ConfirmRegistrationModule,
+    SpecialitiesModule,
+    IndustriesModule,
   ],
 })
 export class AppModule {}

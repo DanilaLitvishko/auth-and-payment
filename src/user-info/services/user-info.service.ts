@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { User } from 'src/auth/repositories/user.entity';
 import { UserCredentialsDto } from '../dto/user-credentials.dto';
-import { Industries } from '../repositories/industires/industries.entity';
-import { IndustriesRepository } from '../repositories/industires/industries.repository';
-import { Specialities } from '../repositories/specialities/specialities.entity';
-import { SpecialitiesRepository } from '../repositories/specialities/specialities.repository';
-import { UserInfo } from '../repositories/user-info/user-info.entity';
-import { UserInfoRepository } from '../repositories/user-info/user-info.repository';
+import { IndustriesRepository } from '../../industries/repositories/industries.repository';
+import { UserInfo } from '../repositories/user-info.entity';
+import { UserInfoRepository } from '../repositories/user-info.repository';
+import { SpecialitiesRepository } from 'src/specialities/repositories/specialities.repository';
 
 @Injectable()
 export class UserInfoService {

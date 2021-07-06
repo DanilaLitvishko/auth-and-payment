@@ -3,15 +3,15 @@ import { UserInfoService } from '../services/user-info.service';
 import { UserInfoController } from '../controllers/user-info.controller';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserInfoRepository } from '../repositories/user-info/user-info.repository';
-import { IndustriesRepository } from '../repositories/industires/industries.repository';
-import { SpecialitiesRepository } from '../repositories/specialities/specialities.repository';
-import { AuthModule } from 'src/auth/modules/auth.module';
+import { UserInfoRepository } from '../repositories/user-info.repository';
+import { IndustriesRepository } from '../../industries/repositories/industries.repository'
+import { AuthModule } from 'src/auth/module/auth.module';
+import { SpecialitiesRepository } from 'src/specialities/repositories/specialities.repository';
 
 @Module({
   imports: [
     ConfigModule,
-    TypeOrmModule.forFeature([IndustriesRepository, SpecialitiesRepository,UserInfoRepository]),
+    TypeOrmModule.forFeature([IndustriesRepository, SpecialitiesRepository, UserInfoRepository]),
     AuthModule,
   ],
   providers: [UserInfoService],

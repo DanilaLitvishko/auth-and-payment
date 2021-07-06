@@ -1,7 +1,6 @@
+import { Specialities } from "src/specialities/repositories/specialities.entity";
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Industries } from "../industires/industries.entity";
-import { IndustriesRepository } from "../industires/industries.repository";
-import { Specialities } from "../specialities/specialities.entity";
+import { Industries } from "../../industries/repositories/industries.entity";
 
 @Entity()
 export class UserInfo{
