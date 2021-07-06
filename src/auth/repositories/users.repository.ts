@@ -16,7 +16,7 @@ const code = () => {
 
 @EntityRepository(User)
 export class UsersRepository extends Repository<User>{
-    async createUser(authCredentialsDto: AuthCredentialsDto): Promise<void>{
+    async createUser(authCredentialsDto: AuthCredentialsDto): Promise<User>{
 
         const {username, password} = authCredentialsDto;
 
@@ -47,7 +47,7 @@ export class UsersRepository extends Repository<User>{
 
         const user = this.create({username, password:hashedPassword, confirmationCode, isConfirm:false});
         try{
-            await this.save(user);
+            return await this.save(user);
         }catch(err){
             if(err.code === '23505'){ //duplicate username
                 throw new ConflictException('Username already exists');
