@@ -1,11 +1,11 @@
  
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './auth/modules/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { async } from 'rxjs';
 import { configValidationSchema } from './config.schema';
-import { UserInfoModule } from './user-info/user-info.module';
+import { UserInfoModule } from './user-info/modules/user-info.module';
+import { ConfirmRegistrationModule } from './confirm-registration/modules/confirm-registration.module';
 
 @Module({
   imports: [
@@ -13,6 +13,7 @@ import { UserInfoModule } from './user-info/user-info.module';
       envFilePath:[`.env.stage.${process.env.STAGE}`],
       validationSchema: configValidationSchema
     }),
+    UserInfoModule,
     TypeOrmModule.forRootAsync({
       imports:[ConfigModule],
       inject: [ConfigService],
@@ -28,7 +29,7 @@ import { UserInfoModule } from './user-info/user-info.module';
       })
     }),
     AuthModule,
-    UserInfoModule
+    ConfirmRegistrationModule,
   ],
 })
 export class AppModule {}
