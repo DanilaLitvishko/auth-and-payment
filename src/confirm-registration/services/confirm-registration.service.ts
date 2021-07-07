@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { User } from 'src/auth/repositories/user.entity';
 import { UsersRepository } from 'src/auth/repositories/users.repository';
+import { UserDto } from '../dto/user.dto';
 const nodemailer = require('nodemailer')
 
 @Injectable()
@@ -8,10 +9,10 @@ export class ConfirmRegistrationService {
     
     constructor(private usersRepository:UsersRepository){}
     
-    async confirmRegistration(confirmationCode:string):Promise<User>{
-        const user:User = await this.usersRepository.findOne({confirmationCode})
-        user.isConfirm = true;
-        return this.usersRepository.save(user)
+    async confirmRegistration(confirmationCode:string):Promise<UserDto>{
+        await this.usersRepository.update({confirmationCode}, {isConfirm: true})
+        const userEntity:User = await this.usersRepository.findOne({confirmationCode})
+        return new UserDto(userEntity);
     }
 
     async resendEmail(email:string):Promise<void>{
