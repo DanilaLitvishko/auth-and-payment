@@ -14,7 +14,7 @@ export class ConfirmRegistrationController {
     }
 
     @Get('/resend-email/:email')
-    resendEmail(@Param('email') email:string):any{
+    resendEmail(@Param('email') email:string):Promise<void>{
         return this.confirmRegistrationService.resendEmail(email);
     }
 }
