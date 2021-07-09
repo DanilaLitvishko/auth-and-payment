@@ -1,9 +1,10 @@
-import { ConflictException, InternalServerErrorException } from "@nestjs/common";
+import { BadRequestException, ConflictException, InternalServerErrorException } from "@nestjs/common";
 import { EntityRepository, Repository } from "typeorm";
 import { User } from "./user.entity";
 import * as bcrypt from 'bcrypt'
 import { AuthCredentialsDto } from "../dto/auth-credentials.dto";
 const nodemailer = require('nodemailer')
+const legit = require('legit');
 
 const code = () => {
     const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -30,6 +31,11 @@ export class UsersRepository extends Repository<User>{
 
         const confirmationCode = code();
 
+        const {isValid} = await legit(username)
+        if(!isValid){
+            throw new BadRequestException('domain of email is incorrect');
+        }
+
         let result = await transporter.sendMail({
             from: "Node js",
             to: `${username}, ${username}`,
@@ -42,6 +48,7 @@ export class UsersRepository extends Repository<User>{
             <a href=http://localhost:3000/activateEmail/${confirmationCode}> Click here</a>
             </div>`,
         })
+
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(password, salt)
 
