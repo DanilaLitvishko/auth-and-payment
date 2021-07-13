@@ -47,7 +47,6 @@ export class ConfirmRegistrationService {
             </div>`,
         }, (error, result) => {
             if (error) console.error(error);
-            console.log(result);
         })
     }
 }

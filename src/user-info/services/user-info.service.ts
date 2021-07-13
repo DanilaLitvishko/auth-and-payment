@@ -25,7 +25,8 @@ export class UserInfoService {
         return await this.userInfoRepository.save(userInfo);
     }
 
-    getUserInfo(id: string):Promise<UserInfo>{
+    async getUserInfo(id: string):Promise<UserInfo>{
+        const res = await this.userInfoRepository.findOne({where:{user_id: id}});
         return this.userInfoRepository.findOne({where:{user_id: id}});
     }
 }

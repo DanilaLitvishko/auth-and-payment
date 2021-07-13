@@ -19,11 +19,11 @@ export class UserInfo{
     @Column()
     phoneNumber:string;
 
-    @ManyToMany(() => Specialities, {cascade:true})
+    @ManyToMany(() => Specialities, {cascade:true, eager: true})
     @JoinTable()
     specialities: Specialities[];
 
-    @ManyToMany(() => Industries, {cascade:true})
+    @ManyToMany(() => Industries, {cascade:true, eager:true})
     @JoinTable()
     industries: Industries[];
 }
