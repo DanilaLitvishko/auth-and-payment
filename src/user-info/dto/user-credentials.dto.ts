@@ -1,4 +1,6 @@
 import { IsArray, IsIBAN, IsPhoneNumber, IsString, MaxLength, MinLength } from "class-validator";
+import { Industries } from "src/industries/repositories/industries.entity";
+import { Specialities } from "src/specialities/repositories/specialities.entity";
 
 export class UserCredentialsDto{
     @MinLength(4)
@@ -14,7 +16,7 @@ export class UserCredentialsDto{
     @IsPhoneNumber()
     phoneNumber:string;
 
-    specialities: string[];
+    specialities: Specialities[];
 
-    industries: string[];
+    industries: Industries[];
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { User } from 'src/auth/repositories/user.entity';
-import { Industries } from 'src/industries/repositories/industries.entity';
 import { IndustriesRepository } from 'src/industries/repositories/industries.repository';
 import { SpecialitiesRepository } from 'src/specialities/repositories/specialities.repository';
 import { UserCredentialsDto } from '../dto/user-credentials.dto';
@@ -9,9 +8,7 @@ import { UserInfoRepository } from '../repositories/user-info.repository';
 
 @Injectable()
 export class UserInfoService {
-    constructor(private userInfoRepository:UserInfoRepository, 
-        private specialitiesRepository:SpecialitiesRepository, private industriesRepository:IndustriesRepository
-    ){}
+    constructor(private userInfoRepository:UserInfoRepository){}
 
     async addUserInfo(userCredentialsDto: UserCredentialsDto, user:User):Promise<UserInfo>{
         const {name, companyName, phoneNumber, specialities, industries} = userCredentialsDto;
@@ -22,12 +19,10 @@ export class UserInfoService {
             phoneNumber,
             user_id: user.id,
             specialities,
-            industries,
+            industries
         })
-        
-        await this.userInfoRepository.save(userInfo);
 
-        return userInfo;
+        return await this.userInfoRepository.save(userInfo);
     }
 
     getUserInfo(id: string):Promise<UserInfo>{
