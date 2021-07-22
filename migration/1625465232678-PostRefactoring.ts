@@ -3,7 +3,7 @@ import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 export class PostRefactoring1625465232678 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.createDatabase('linkedIn');
+        await queryRunner.createDatabase('first_task');
         await queryRunner.createTable(new Table({
             name: "user",
             columns: [
