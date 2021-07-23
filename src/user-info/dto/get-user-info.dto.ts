@@ -25,4 +25,6 @@ export class GetUserInfo{
     industries: Industries[];
 
     email: string;
+
+    image: string
 }

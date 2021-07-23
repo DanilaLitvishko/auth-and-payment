@@ -22,7 +22,7 @@ export class AuthService {
         return this.userRepository.createUser(authCredentialsDto)
     }
 
-    async signIn(authCredentialsDto: AuthCredentialsDto):Promise<{ name:string, accessToken:string }>{
+    async signIn(authCredentialsDto: AuthCredentialsDto):Promise<{ name:string, accessToken:string, image:string }>{
         const { username, password } = authCredentialsDto;
         const user:User = await this.userRepository.findOne({ username });
 
@@ -35,10 +35,12 @@ export class AuthService {
             const accessToken:string = await this.jwtService.sign(payload)
             const userInfo: UserInfo = await this.userInfoRepository.findOne({where:{user_id: user.id}})
             let name = 'Anonymous';
+            let image;
             if(userInfo){
                 name = userInfo.name
+                image = userInfo.image
             }
-            return {name, accessToken};
+            return {name, accessToken, image};
         }else{
             throw new UnauthorizedException('Please check your credentials')
         }

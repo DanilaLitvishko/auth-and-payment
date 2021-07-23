@@ -24,7 +24,7 @@ export class UserInfoController {
     }
 
     @Post('specialities')
-    changeSpecialities(@Body() changeSpecialitiesDto:ChangeSpecialitiesDto):Promise<UserInfo>{
-        return this.userInfoService.changeSpecialities(changeSpecialitiesDto);
+    changeSpecialities(@Body() changeSpecialitiesDto:ChangeSpecialitiesDto, @GetUser() user:User):Promise<UserInfo>{
+        return this.userInfoService.changeSpecialities(changeSpecialitiesDto, user);
     }
 }

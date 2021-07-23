@@ -13,7 +13,7 @@ export class UserInfoService {
     constructor(private userInfoRepository:UserInfoRepository){}
 
     async addUserInfo(userCredentialsDto: UserCredentialsDto, user:User):Promise<UserInfo>{
-        const {name, companyName, phoneNumber, specialities, industries} = userCredentialsDto;
+        const {name, companyName, phoneNumber, specialities, industries, image} = userCredentialsDto;
 
         const userInfo = this.userInfoRepository.create({
             name,
@@ -21,7 +21,8 @@ export class UserInfoService {
             phoneNumber,
             user_id: user.id,
             specialities,
-            industries
+            industries,
+            image
         })
 
         return await this.userInfoRepository.save(userInfo);
@@ -37,14 +38,15 @@ export class UserInfoService {
             companyName: userInfo.companyName,
             specialities: userInfo.specialities,
             industries: userInfo.industries,  
-            email
+            email,
+            image: userInfo.image,
         }
         return res;
     }
 
-    async changeSpecialities(changeSpecialitiesDto:ChangeSpecialitiesDto):Promise<UserInfo>{
-        const {userInfoId, userSpecialities} = changeSpecialitiesDto;
-        const userInfo:UserInfo = await this.userInfoRepository.findOne({where:{id: userInfoId}})
+    async changeSpecialities(changeSpecialitiesDto:ChangeSpecialitiesDto, user: User):Promise<UserInfo>{
+        const {userSpecialities} = changeSpecialitiesDto;
+        const userInfo:UserInfo = await this.userInfoRepository.findOne({where:{user_id: user.id}})
         userInfo.specialities = userSpecialities;
         return await this.userInfoRepository.save(userInfo)
     }

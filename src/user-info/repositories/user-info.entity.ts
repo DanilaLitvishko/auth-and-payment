@@ -19,6 +19,9 @@ export class UserInfo{
     @Column()
     phoneNumber:string;
 
+    @Column()
+    image:string;
+
     @ManyToMany(() => Specialities, {cascade:true, eager: true})
     @JoinTable()
     specialities: Specialities[];

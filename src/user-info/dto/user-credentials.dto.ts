@@ -19,4 +19,6 @@ export class UserCredentialsDto{
     specialities: Specialities[];
 
     industries: Industries[];
+
+    image:string;
 }
