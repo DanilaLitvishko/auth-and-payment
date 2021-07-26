@@ -1,3 +1,4 @@
+import { Payment } from "src/payment/entity/payment.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -16,4 +17,10 @@ export class User{
 
     @Column()
     isConfirm: boolean;
+
+    @Column()
+    isSubscribing: boolean;
+
+    @OneToMany(_type => Payment, payment => payment.user, { eager: true })
+    payments: Payment[];
 }

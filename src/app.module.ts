@@ -8,6 +8,8 @@ import { UserInfoModule } from './user-info/modules/user-info.module';
 import { ConfirmRegistrationModule } from './confirm-registration/modules/confirm-registration.module';
 import { SpecialitiesModule } from './specialities/module/specialities.module';
 import { IndustriesModule } from './industries/module/industries.module';
+import { PaymentService } from './payment/service/payment.service';
+import { PaymentModule } from './payment/module/payment.module';
 
 @Module({
   imports: [
@@ -16,6 +18,7 @@ import { IndustriesModule } from './industries/module/industries.module';
       validationSchema: configValidationSchema
     }),
     UserInfoModule,
+    PaymentModule,
     TypeOrmModule.forRootAsync({
       imports:[ConfigModule],
       inject: [ConfigService],
@@ -33,7 +36,7 @@ import { IndustriesModule } from './industries/module/industries.module';
     AuthModule,
     ConfirmRegistrationModule,
     SpecialitiesModule,
-    IndustriesModule
+    IndustriesModule,
   ],
 })
 export class AppModule {}
