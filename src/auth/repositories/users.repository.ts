@@ -52,7 +52,7 @@ export class UsersRepository extends Repository<User>{
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(password, salt)
 
-        const user = this.create({username, password:hashedPassword, confirmationCode, isConfirm:false, isSubscribing:false});
+        const user = this.create({username, password:hashedPassword, confirmationCode, isConfirm:false, isSubscribing:false, isAdmin: false});
         try{
             await this.save(user);
         }catch(err){

@@ -10,6 +10,7 @@ import { SpecialitiesModule } from './specialities/module/specialities.module';
 import { IndustriesModule } from './industries/module/industries.module';
 import { PaymentService } from './payment/service/payment.service';
 import { PaymentModule } from './payment/module/payment.module';
+import { ProductsModule } from './products/module/products.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { PaymentModule } from './payment/module/payment.module';
     ConfirmRegistrationModule,
     SpecialitiesModule,
     IndustriesModule,
+    ProductsModule,
   ],
 })
 export class AppModule {}

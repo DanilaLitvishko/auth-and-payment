@@ -22,9 +22,10 @@ export class AuthService {
         return this.userRepository.createUser(authCredentialsDto)
     }
 
-    async signIn(authCredentialsDto: AuthCredentialsDto):Promise<{ name:string, accessToken:string, image:string }>{
+    async signIn(authCredentialsDto: AuthCredentialsDto):Promise<{ name:string, accessToken:string, image:string, isAdmin:boolean }>{
         const { username, password } = authCredentialsDto;
         const user:User = await this.userRepository.findOne({ username });
+        const isAdmin = user.isAdmin;
 
         if(!user.isConfirm){
             throw new UnauthorizedException('Please confirm your email')
@@ -40,7 +41,7 @@ export class AuthService {
                 name = userInfo.name
                 image = userInfo.image
             }
-            return {name, accessToken, image};
+            return {name, accessToken, image, isAdmin};
         }else{
             throw new UnauthorizedException('Please check your credentials')
         }
