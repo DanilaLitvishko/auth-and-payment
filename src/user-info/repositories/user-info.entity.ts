@@ -1,7 +1,6 @@
+import { Industries } from "src/industries/repositories/industries.entity";
+import { Specialities } from "src/specialities/repositories/specialities.entity";
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Industries } from "../industires/industries.entity";
-import { IndustriesRepository } from "../industires/industries.repository";
-import { Specialities } from "../specialities/specialities.entity";
 
 @Entity()
 export class UserInfo{
@@ -20,11 +19,14 @@ export class UserInfo{
     @Column()
     phoneNumber:string;
 
-    @ManyToMany(() => Specialities)
+    @Column()
+    image:string;
+
+    @ManyToMany(() => Specialities, {cascade:true, eager: true})
     @JoinTable()
     specialities: Specialities[];
 
-    @ManyToMany(() => Industries)
+    @ManyToMany(() => Industries, {cascade:true, eager:true})
     @JoinTable()
     industries: Industries[];
 }

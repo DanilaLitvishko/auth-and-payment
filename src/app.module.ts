@@ -6,6 +6,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { configValidationSchema } from './config.schema';
 import { UserInfoModule } from './user-info/modules/user-info.module';
 import { ConfirmRegistrationModule } from './confirm-registration/modules/confirm-registration.module';
+import { SpecialitiesModule } from './specialities/module/specialities.module';
+import { IndustriesModule } from './industries/module/industries.module';
+import { PaymentService } from './payment/service/payment.service';
+import { PaymentModule } from './payment/module/payment.module';
+import { ProductsModule } from './products/module/products.module';
 
 @Module({
   imports: [
@@ -14,6 +19,7 @@ import { ConfirmRegistrationModule } from './confirm-registration/modules/confir
       validationSchema: configValidationSchema
     }),
     UserInfoModule,
+    PaymentModule,
     TypeOrmModule.forRootAsync({
       imports:[ConfigModule],
       inject: [ConfigService],
@@ -30,6 +36,9 @@ import { ConfirmRegistrationModule } from './confirm-registration/modules/confir
     }),
     AuthModule,
     ConfirmRegistrationModule,
+    SpecialitiesModule,
+    IndustriesModule,
+    ProductsModule,
   ],
 })
 export class AppModule {}

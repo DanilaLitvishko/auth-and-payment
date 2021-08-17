@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { User } from 'src/auth/repositories/user.entity';
 import { UsersRepository } from 'src/auth/repositories/users.repository';
 import { UserDto } from '../dto/user.dto';
 const nodemailer = require('nodemailer')
+const legit = require('legit');
 
 @Injectable()
 export class ConfirmRegistrationService {
@@ -20,6 +21,11 @@ export class ConfirmRegistrationService {
 
         const {username, confirmationCode} = user;
 
+        const {isValid} = await legit(username)
+        if(!isValid){
+            throw new BadRequestException('domain of email is incorrect');
+        }
+
         let transporter = nodemailer.createTransport({
             service: "Gmail",
             auth: {
@@ -28,7 +34,7 @@ export class ConfirmRegistrationService {
             }
         });
 
-        let result = await transporter.sendMail({
+        await transporter.sendMail({
             from: "Node js",
             to: `${username}, ${username}`,
             subject: 'Confirm Registration',
@@ -39,6 +45,8 @@ export class ConfirmRegistrationService {
             <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
             <a href=http://localhost:3000/activateEmail/${confirmationCode}> Click here</a>
             </div>`,
+        }, (error, result) => {
+            if (error) console.error(error);
         })
     }
 }

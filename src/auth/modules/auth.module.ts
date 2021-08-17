@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from '../jwt/jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersRepository } from '../repositories/users.repository';
+import { UserInfoRepository } from 'src/user-info/repositories/user-info.repository';
 
 @Module({
   imports:[
@@ -23,7 +24,7 @@ import { UsersRepository } from '../repositories/users.repository';
         },
       })
     }),
-    TypeOrmModule.forFeature([UsersRepository])
+    TypeOrmModule.forFeature([UsersRepository, UserInfoRepository])
   ],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],

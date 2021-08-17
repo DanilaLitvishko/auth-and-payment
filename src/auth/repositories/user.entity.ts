@@ -1,4 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Payment } from "src/payment/entity/payment.entity";
+import { Product } from "src/products/entity/product.entity";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User{
@@ -16,4 +18,17 @@ export class User{
 
     @Column()
     isConfirm: boolean;
+
+    @Column()
+    isSubscribing: boolean;
+
+    @Column()
+    isAdmin: boolean;
+
+    @OneToMany(_type => Payment, payment => payment.user, { eager: true })
+    payments: Payment[];
+
+    @ManyToMany(() => Product, {cascade:true, eager: true})
+    @JoinTable()
+    products: Product[];
 }
